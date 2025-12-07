@@ -4,6 +4,19 @@ title: "Capstone Project: The Autonomous Humanoid"
 description: "Complete project integrating all modules"
 ---
 
+import PersonalizationButton from '@site/src/components/PersonalizationButton';
+import TranslationButton from '@site/src/components/TranslationButton';
+
+<PersonalizationButton 
+  chapterPath="/docs/module-4-vla/capstone-project"
+  originalContent="sidebar_position: 5"
+/>
+
+<TranslationButton 
+  chapterPath="/docs/module-4-vla/capstone-project"
+  originalContent="sidebar_position: 5"
+/>
+
 # Capstone Project: The Autonomous Humanoid
 
 This capstone project brings together everything you've learned to create a complete autonomous humanoid robot system.

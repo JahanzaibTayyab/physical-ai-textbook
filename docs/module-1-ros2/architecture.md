@@ -4,6 +4,19 @@ title: "ROS 2 Architecture"
 description: "Understanding the core architecture and concepts of ROS 2"
 ---
 
+import PersonalizationButton from '@site/src/components/PersonalizationButton';
+import TranslationButton from '@site/src/components/TranslationButton';
+
+<PersonalizationButton 
+  chapterPath="/docs/module-1-ros2/architecture"
+  originalContent="sidebar_position: 2"
+/>
+
+<TranslationButton 
+  chapterPath="/docs/module-1-ros2/architecture"
+  originalContent="sidebar_position: 2"
+/>
+
 # ROS 2 Architecture
 
 ROS 2 follows a distributed, node-based architecture where different components of a robot system communicate through a middleware layer. Understanding this architecture is fundamental to working with ROS 2.

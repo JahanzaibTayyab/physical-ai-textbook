@@ -4,6 +4,19 @@ title: "Voice-to-Action with Whisper"
 description: "Using OpenAI Whisper for voice command recognition"
 ---
 
+import PersonalizationButton from '@site/src/components/PersonalizationButton';
+import TranslationButton from '@site/src/components/TranslationButton';
+
+<PersonalizationButton 
+  chapterPath="/docs/module-4-vla/voice-to-action"
+  originalContent="sidebar_position: 2"
+/>
+
+<TranslationButton 
+  chapterPath="/docs/module-4-vla/voice-to-action"
+  originalContent="sidebar_position: 2"
+/>
+
 # Voice-to-Action with Whisper
 
 OpenAI Whisper provides accurate speech recognition that we can use to convert voice commands into robot actions.
@@ -122,4 +135,3 @@ class CommandProcessor(Node):
 4. **Handle errors**: Graceful fallback for unclear commands
 
 [Next: Cognitive Planning →](./cognitive-planning.md)
-

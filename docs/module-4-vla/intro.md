@@ -4,6 +4,19 @@ title: "Introduction to Vision-Language-Action"
 description: "Integrating LLMs with robotics for natural human-robot interaction"
 ---
 
+import PersonalizationButton from '@site/src/components/PersonalizationButton';
+import TranslationButton from '@site/src/components/TranslationButton';
+
+<PersonalizationButton 
+  chapterPath="/docs/module-4-vla/intro"
+  originalContent="sidebar_position: 1"
+/>
+
+<TranslationButton 
+  chapterPath="/docs/module-4-vla/intro"
+  originalContent="sidebar_position: 1"
+/>
+
 # Introduction to Vision-Language-Action
 
 Welcome to Module 4: Vision-Language-Action (VLA). This module brings together everything you've learned to create robots that understand natural language, perceive their environment, and take appropriate actions.
@@ -41,4 +54,3 @@ By the end of this module, you will be able to:
 - Basic knowledge of LLMs and NLP
 
 [Next: Voice-to-Action →](./voice-to-action.md)
-

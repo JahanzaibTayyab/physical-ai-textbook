@@ -4,6 +4,19 @@ title: "Isaac ROS"
 description: "Hardware-accelerated VSLAM and navigation with Isaac ROS"
 ---
 
+import PersonalizationButton from '@site/src/components/PersonalizationButton';
+import TranslationButton from '@site/src/components/TranslationButton';
+
+<PersonalizationButton 
+  chapterPath="/docs/module-3-isaac/isaac-ros"
+  originalContent="sidebar_position: 3"
+/>
+
+<TranslationButton 
+  chapterPath="/docs/module-3-isaac/isaac-ros"
+  originalContent="sidebar_position: 3"
+/>
+
 # Isaac ROS
 
 Isaac ROS provides GPU-accelerated ROS 2 packages for high-performance robotics applications, including Visual SLAM (VSLAM), navigation, and perception.
@@ -98,4 +111,3 @@ class ObjectDetector(Node):
 4. **Test on hardware**: Verify GPU acceleration works
 
 [Next: Nav2 Path Planning →](./nav2-path-planning.md)
-

@@ -4,6 +4,19 @@ title: "Nav2 Path Planning"
 description: "Path planning for bipedal humanoid movement"
 ---
 
+import PersonalizationButton from '@site/src/components/PersonalizationButton';
+import TranslationButton from '@site/src/components/TranslationButton';
+
+<PersonalizationButton 
+  chapterPath="/docs/module-3-isaac/nav2-path-planning"
+  originalContent="sidebar_position: 4"
+/>
+
+<TranslationButton 
+  chapterPath="/docs/module-3-isaac/nav2-path-planning"
+  originalContent="sidebar_position: 4"
+/>
+
 # Nav2 Path Planning
 
 Nav2 provides path planning and navigation for mobile robots, adapted for humanoid bipedal locomotion.
@@ -89,4 +102,3 @@ Nav2 automatically handles obstacles:
 4. **Test in simulation**: Validate before real robot
 
 [Next: Perception and Manipulation →](./perception-manipulation.md)
-

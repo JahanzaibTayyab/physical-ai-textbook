@@ -4,6 +4,19 @@ title: "Sim-to-Real Transfer"
 description: "Transferring learned behaviors from simulation to real robots"
 ---
 
+import PersonalizationButton from '@site/src/components/PersonalizationButton';
+import TranslationButton from '@site/src/components/TranslationButton';
+
+<PersonalizationButton 
+  chapterPath="/docs/module-3-isaac/sim-to-real"
+  originalContent="sidebar_position: 7"
+/>
+
+<TranslationButton 
+  chapterPath="/docs/module-3-isaac/sim-to-real"
+  originalContent="sidebar_position: 7"
+/>
+
 # Sim-to-Real Transfer
 
 Sim-to-real transfer is the process of deploying policies and behaviors learned in simulation to real robots.
@@ -125,4 +138,3 @@ Congratulations! You've learned:
 Ready for Module 4: Vision-Language-Action!
 
 [Next Module: Vision-Language-Action (VLA) →](../module-4-vla/intro.md)
-

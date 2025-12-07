@@ -4,6 +4,19 @@ title: "Sensor Simulation"
 description: "Simulating LiDAR, depth cameras, and IMUs in Gazebo"
 ---
 
+import PersonalizationButton from '@site/src/components/PersonalizationButton';
+import TranslationButton from '@site/src/components/TranslationButton';
+
+<PersonalizationButton 
+  chapterPath="/docs/module-2-simulation/sensor-simulation"
+  originalContent="sidebar_position: 6"
+/>
+
+<TranslationButton 
+  chapterPath="/docs/module-2-simulation/sensor-simulation"
+  originalContent="sidebar_position: 6"
+/>
+
 # Sensor Simulation
 
 Accurate sensor simulation is crucial for developing perception algorithms. Gazebo can simulate various sensors with realistic noise and characteristics.
@@ -297,4 +310,3 @@ Congratulations! You've learned:
 You're ready for Module 3: NVIDIA Isaac!
 
 [Next Module: The AI-Robot Brain (NVIDIA Isaac) →](../module-3-isaac/intro.md)
-

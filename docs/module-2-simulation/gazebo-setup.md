@@ -4,6 +4,19 @@ title: "Gazebo Setup"
 description: "Install and configure Gazebo for robot simulation"
 ---
 
+import PersonalizationButton from '@site/src/components/PersonalizationButton';
+import TranslationButton from '@site/src/components/TranslationButton';
+
+<PersonalizationButton 
+  chapterPath="/docs/module-2-simulation/gazebo-setup"
+  originalContent="sidebar_position: 2"
+/>
+
+<TranslationButton 
+  chapterPath="/docs/module-2-simulation/gazebo-setup"
+  originalContent="sidebar_position: 2"
+/>
+
 # Gazebo Setup
 
 Gazebo is a powerful physics-based simulator that integrates seamlessly with ROS 2. Let's set it up and run your first simulation.
@@ -220,4 +233,3 @@ gz topic -t "/cmd_vel" -m geometry_msgs.msgs.Twist -p "linear: {x: 0.5}"
 Now that Gazebo is set up, let's learn about URDF and SDF formats for describing robots in simulation.
 
 [Next: URDF and SDF →](./urdf-sdf.md)
-

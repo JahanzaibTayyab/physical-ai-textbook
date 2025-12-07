@@ -4,6 +4,19 @@ title: "URDF Basics"
 description: "Learn how to describe humanoid robot structure using URDF"
 ---
 
+import PersonalizationButton from '@site/src/components/PersonalizationButton';
+import TranslationButton from '@site/src/components/TranslationButton';
+
+<PersonalizationButton 
+  chapterPath="/docs/module-1-ros2/urdf-basics"
+  originalContent="sidebar_position: 6"
+/>
+
+<TranslationButton 
+  chapterPath="/docs/module-1-ros2/urdf-basics"
+  originalContent="sidebar_position: 6"
+/>
+
 # URDF Basics
 
 URDF (Unified Robot Description Format) is an XML format used to describe the physical structure of a robot, including links (rigid bodies), joints (connections between links), and their properties.
@@ -248,4 +261,3 @@ Then add a RobotModel display and set the description parameter.
 Now that you can describe robot structure, let's learn how to use launch files to start and configure robot systems.
 
 [Next: Launch Files →](./launch-files.md)
-

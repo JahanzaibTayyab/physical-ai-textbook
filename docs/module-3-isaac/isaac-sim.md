@@ -4,6 +4,19 @@ title: "Isaac Sim"
 description: "Photorealistic simulation and synthetic data generation"
 ---
 
+import PersonalizationButton from '@site/src/components/PersonalizationButton';
+import TranslationButton from '@site/src/components/TranslationButton';
+
+<PersonalizationButton 
+  chapterPath="/docs/module-3-isaac/isaac-sim"
+  originalContent="sidebar_position: 2"
+/>
+
+<TranslationButton 
+  chapterPath="/docs/module-3-isaac/isaac-sim"
+  originalContent="sidebar_position: 2"
+/>
+
 # Isaac Sim
 
 Isaac Sim is NVIDIA's photorealistic robotics simulator built on Omniverse. It provides advanced graphics, physics, and AI capabilities for training and testing robots.
@@ -199,4 +212,3 @@ class BalanceSimulator:
 Now let's learn about Isaac ROS for hardware-accelerated ROS 2 packages.
 
 [Next: Isaac ROS →](./isaac-ros.md)
-

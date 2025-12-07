@@ -4,6 +4,19 @@ title: "URDF and SDF Formats"
 description: "Understanding robot description formats for simulation"
 ---
 
+import PersonalizationButton from '@site/src/components/PersonalizationButton';
+import TranslationButton from '@site/src/components/TranslationButton';
+
+<PersonalizationButton 
+  chapterPath="/docs/module-2-simulation/urdf-sdf"
+  originalContent="sidebar_position: 3"
+/>
+
+<TranslationButton 
+  chapterPath="/docs/module-2-simulation/urdf-sdf"
+  originalContent="sidebar_position: 3"
+/>
+
 # URDF and SDF Formats
 
 Both URDF and SDF are XML formats for describing robots, but they serve different purposes in simulation.
@@ -201,4 +214,3 @@ Here's a complete SDF file for a humanoid robot:
 Now that you understand robot description formats, let's learn about physics simulation.
 
 [Next: Physics Simulation →](./physics-simulation.md)
-

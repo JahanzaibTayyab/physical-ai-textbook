@@ -4,6 +4,19 @@ title: "Introduction to Robot Simulation"
 description: "Learn how to simulate humanoid robots using Gazebo and Unity"
 ---
 
+import PersonalizationButton from '@site/src/components/PersonalizationButton';
+import TranslationButton from '@site/src/components/TranslationButton';
+
+<PersonalizationButton 
+  chapterPath="/docs/module-2-simulation/intro"
+  originalContent="sidebar_position: 1"
+/>
+
+<TranslationButton 
+  chapterPath="/docs/module-2-simulation/intro"
+  originalContent="sidebar_position: 1"
+/>
+
 # Introduction to Robot Simulation
 
 Welcome to Module 2: The Digital Twin. In this module, you'll learn how to create virtual representations of humanoid robots and test them in simulated environments before deploying to real hardware.
@@ -72,4 +85,3 @@ Before starting this module, you should have:
 Let's start by setting up Gazebo and getting your first robot simulation running.
 
 [Next: Gazebo Setup →](./gazebo-setup.md)
-

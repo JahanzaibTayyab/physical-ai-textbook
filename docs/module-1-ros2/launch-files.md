@@ -4,6 +4,19 @@ title: "Launch Files"
 description: "Learn how to start and configure ROS 2 systems using launch files"
 ---
 
+import PersonalizationButton from '@site/src/components/PersonalizationButton';
+import TranslationButton from '@site/src/components/TranslationButton';
+
+<PersonalizationButton 
+  chapterPath="/docs/module-1-ros2/launch-files"
+  originalContent="sidebar_position: 7"
+/>
+
+<TranslationButton 
+  chapterPath="/docs/module-1-ros2/launch-files"
+  originalContent="sidebar_position: 7"
+/>
+
 # Launch Files
 
 Launch files allow you to start multiple nodes, set parameters, and configure your robot system with a single command. This is essential for complex humanoid robots with many components.
@@ -264,4 +277,3 @@ ros2 launch humanoid_bringup humanoid.launch.py
 Now that you understand ROS 2 basics, let's learn how to bridge Python AI agents to ROS 2 controllers.
 
 [Next: Python Agents →](./python-agents.md)
-

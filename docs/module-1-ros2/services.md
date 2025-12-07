@@ -4,6 +4,19 @@ title: "Services"
 description: "Learn how to use ROS 2 services for request/response communication"
 ---
 
+import PersonalizationButton from '@site/src/components/PersonalizationButton';
+import TranslationButton from '@site/src/components/TranslationButton';
+
+<PersonalizationButton 
+  chapterPath="/docs/module-1-ros2/services"
+  originalContent="sidebar_position: 4"
+/>
+
+<TranslationButton 
+  chapterPath="/docs/module-1-ros2/services"
+  originalContent="sidebar_position: 4"
+/>
+
 # Services
 
 While topics provide one-way, asynchronous communication, services offer synchronous request/response communication. This is essential for operations that need confirmation or return values.

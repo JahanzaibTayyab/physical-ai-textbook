@@ -4,6 +4,19 @@ title: "ROS 2 Packages"
 description: "Learn how to organize your code into ROS 2 packages"
 ---
 
+import PersonalizationButton from '@site/src/components/PersonalizationButton';
+import TranslationButton from '@site/src/components/TranslationButton';
+
+<PersonalizationButton 
+  chapterPath="/docs/module-1-ros2/packages"
+  originalContent="sidebar_position: 5"
+/>
+
+<TranslationButton 
+  chapterPath="/docs/module-1-ros2/packages"
+  originalContent="sidebar_position: 5"
+/>
+
 # ROS 2 Packages
 
 A ROS 2 package is the fundamental unit for organizing and distributing your ROS 2 code. Packages contain related nodes, libraries, data files, and launch files.
@@ -191,4 +204,3 @@ humanoid_robot_ws/
 Now that you can create packages, let's learn about URDF files for describing robot structure.
 
 [Next: URDF Basics →](./urdf-basics.md)
-

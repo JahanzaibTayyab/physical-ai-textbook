@@ -4,6 +4,19 @@ title: "Cognitive Planning with LLMs"
 description: "Using LLMs to translate natural language to ROS 2 actions"
 ---
 
+import PersonalizationButton from '@site/src/components/PersonalizationButton';
+import TranslationButton from '@site/src/components/TranslationButton';
+
+<PersonalizationButton 
+  chapterPath="/docs/module-4-vla/cognitive-planning"
+  originalContent="sidebar_position: 3"
+/>
+
+<TranslationButton 
+  chapterPath="/docs/module-4-vla/cognitive-planning"
+  originalContent="sidebar_position: 3"
+/>
+
 # Cognitive Planning with LLMs
 
 Large Language Models can understand natural language commands and generate sequences of robot actions.
@@ -123,4 +136,3 @@ class ContextAwarePlanner(CognitivePlanner):
 4. **Use context**: Include robot state in planning
 
 [Next: Multi-Modal Interaction →](./multi-modal-interaction.md)
-

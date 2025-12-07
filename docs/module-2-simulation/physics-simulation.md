@@ -4,6 +4,19 @@ title: "Physics Simulation"
 description: "Understanding gravity, collisions, and dynamics in Gazebo"
 ---
 
+import PersonalizationButton from '@site/src/components/PersonalizationButton';
+import TranslationButton from '@site/src/components/TranslationButton';
+
+<PersonalizationButton 
+  chapterPath="/docs/module-2-simulation/physics-simulation"
+  originalContent="sidebar_position: 4"
+/>
+
+<TranslationButton 
+  chapterPath="/docs/module-2-simulation/physics-simulation"
+  originalContent="sidebar_position: 4"
+/>
+
 # Physics Simulation
 
 Physics simulation is what makes Gazebo realistic. Understanding how physics works in simulation helps you create accurate robot models and behaviors.
@@ -225,4 +238,3 @@ Tune physics for your needs:
 Now that you understand physics, let's learn about Unity for high-fidelity rendering.
 
 [Next: Unity Rendering →](./unity-rendering.md)
-

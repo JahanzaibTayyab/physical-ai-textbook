@@ -4,6 +4,19 @@ title: "Nodes and Topics"
 description: "Learn how to create ROS 2 nodes and communicate using topics"
 ---
 
+import PersonalizationButton from '@site/src/components/PersonalizationButton';
+import TranslationButton from '@site/src/components/TranslationButton';
+
+<PersonalizationButton 
+  chapterPath="/docs/module-1-ros2/nodes-and-topics"
+  originalContent="sidebar_position: 3"
+/>
+
+<TranslationButton 
+  chapterPath="/docs/module-1-ros2/nodes-and-topics"
+  originalContent="sidebar_position: 3"
+/>
+
 # Nodes and Topics
 
 In this lesson, you'll learn how to create ROS 2 nodes and use topics for communication. This is the foundation of ROS 2 programming.

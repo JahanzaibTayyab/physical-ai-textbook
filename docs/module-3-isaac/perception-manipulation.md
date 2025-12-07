@@ -4,6 +4,19 @@ title: "AI-Powered Perception and Manipulation"
 description: "Using AI for object detection, pose estimation, and manipulation"
 ---
 
+import PersonalizationButton from '@site/src/components/PersonalizationButton';
+import TranslationButton from '@site/src/components/TranslationButton';
+
+<PersonalizationButton 
+  chapterPath="/docs/module-3-isaac/perception-manipulation"
+  originalContent="sidebar_position: 5"
+/>
+
+<TranslationButton 
+  chapterPath="/docs/module-3-isaac/perception-manipulation"
+  originalContent="sidebar_position: 5"
+/>
+
 # AI-Powered Perception and Manipulation
 
 Isaac provides AI-powered capabilities for perception and manipulation using deep learning models.
@@ -119,4 +132,3 @@ class ManipulationController(Node):
 4. **Handle uncertainty**: Account for pose estimation errors
 
 [Next: Reinforcement Learning →](./reinforcement-learning.md)
-

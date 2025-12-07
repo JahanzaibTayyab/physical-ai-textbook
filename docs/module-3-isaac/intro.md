@@ -4,6 +4,19 @@ title: "Introduction to NVIDIA Isaac"
 description: "Learn about NVIDIA Isaac platform for AI-powered robotics"
 ---
 
+import PersonalizationButton from '@site/src/components/PersonalizationButton';
+import TranslationButton from '@site/src/components/TranslationButton';
+
+<PersonalizationButton 
+  chapterPath="/docs/module-3-isaac/intro"
+  originalContent="sidebar_position: 1"
+/>
+
+<TranslationButton 
+  chapterPath="/docs/module-3-isaac/intro"
+  originalContent="sidebar_position: 1"
+/>
+
 # Introduction to NVIDIA Isaac
 
 Welcome to Module 3: The AI-Robot Brain. In this module, you'll learn about NVIDIA Isaac, a comprehensive platform for developing AI-powered robots with advanced perception, navigation, and control capabilities.
@@ -65,4 +78,3 @@ Before starting this module, you should have:
 Let's start with Isaac Sim for photorealistic simulation.
 
 [Next: Isaac Sim →](./isaac-sim.md)
-

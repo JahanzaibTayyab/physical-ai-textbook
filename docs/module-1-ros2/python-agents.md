@@ -4,6 +4,19 @@ title: "Python Agents with rclpy"
 description: "Learn how to bridge Python AI agents to ROS 2 controllers"
 ---
 
+import PersonalizationButton from '@site/src/components/PersonalizationButton';
+import TranslationButton from '@site/src/components/TranslationButton';
+
+<PersonalizationButton 
+  chapterPath="/docs/module-1-ros2/python-agents"
+  originalContent="sidebar_position: 8"
+/>
+
+<TranslationButton 
+  chapterPath="/docs/module-1-ros2/python-agents"
+  originalContent="sidebar_position: 8"
+/>
+
 # Python Agents with rclpy
 
 One of the powerful aspects of ROS 2 is its Python support through `rclpy`. This allows you to integrate AI agents, machine learning models, and high-level planning with low-level robot control.
@@ -307,4 +320,3 @@ Congratulations! You've learned:
 You're now ready to move on to Module 2: Simulation!
 
 [Next Module: The Digital Twin (Gazebo & Unity) →](../module-2-simulation/intro.md)
-

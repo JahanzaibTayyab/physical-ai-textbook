@@ -4,6 +4,19 @@ title: "Multi-Modal Interaction"
 description: "Combining speech, gesture, and vision for natural interaction"
 ---
 
+import PersonalizationButton from '@site/src/components/PersonalizationButton';
+import TranslationButton from '@site/src/components/TranslationButton';
+
+<PersonalizationButton 
+  chapterPath="/docs/module-4-vla/multi-modal-interaction"
+  originalContent="sidebar_position: 4"
+/>
+
+<TranslationButton 
+  chapterPath="/docs/module-4-vla/multi-modal-interaction"
+  originalContent="sidebar_position: 4"
+/>
+
 # Multi-Modal Interaction
 
 Multi-modal interaction combines multiple input modalities (speech, gesture, vision) for more natural and robust human-robot interaction.
@@ -118,4 +131,3 @@ class UnifiedInterface(Node):
 4. **Fallback gracefully**: Handle missing modalities
 
 [Next: Capstone Project →](./capstone-project.md)
-

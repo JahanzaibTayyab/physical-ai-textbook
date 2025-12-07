@@ -4,6 +4,19 @@ title: "Unity Rendering"
 description: "High-fidelity rendering and human-robot interaction in Unity"
 ---
 
+import PersonalizationButton from '@site/src/components/PersonalizationButton';
+import TranslationButton from '@site/src/components/TranslationButton';
+
+<PersonalizationButton 
+  chapterPath="/docs/module-2-simulation/unity-rendering"
+  originalContent="sidebar_position: 5"
+/>
+
+<TranslationButton 
+  chapterPath="/docs/module-2-simulation/unity-rendering"
+  originalContent="sidebar_position: 5"
+/>
+
 # Unity Rendering
 
 Unity provides photorealistic rendering capabilities that complement Gazebo's physics simulation. Use Unity for visualization, VR/AR, and human-robot interaction studies.
@@ -223,4 +236,3 @@ Camera.main.useOcclusionCulling = true;
 Now let's learn how to simulate sensors like LiDAR, cameras, and IMUs.
 
 [Next: Sensor Simulation →](./sensor-simulation.md)
-

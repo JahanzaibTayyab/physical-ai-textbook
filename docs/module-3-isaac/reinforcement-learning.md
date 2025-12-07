@@ -4,6 +4,19 @@ title: "Reinforcement Learning for Robot Control"
 description: "Training RL policies for humanoid robot control"
 ---
 
+import PersonalizationButton from '@site/src/components/PersonalizationButton';
+import TranslationButton from '@site/src/components/TranslationButton';
+
+<PersonalizationButton 
+  chapterPath="/docs/module-3-isaac/reinforcement-learning"
+  originalContent="sidebar_position: 6"
+/>
+
+<TranslationButton 
+  chapterPath="/docs/module-3-isaac/reinforcement-learning"
+  originalContent="sidebar_position: 6"
+/>
+
 # Reinforcement Learning for Robot Control
 
 Reinforcement Learning (RL) enables robots to learn complex behaviors through trial and error in simulation.
@@ -116,4 +129,3 @@ class RLController(Node):
 4. **Validate policies**: Test in simulation before real robot
 
 [Next: Sim-to-Real Transfer →](./sim-to-real.md)
-
