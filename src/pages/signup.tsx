@@ -3,6 +3,7 @@
  */
 
 import React, { useState } from "react";
+
 import Layout from "@theme/Layout";
 import styles from "./auth.module.css";
 
@@ -40,11 +41,12 @@ export default function SignupPage(): React.JSX.Element {
       }
 
       const data = await response.json();
-      // Store session token
+      // Store session token and user info
       localStorage.setItem("session_token", data.session_token);
       localStorage.setItem("user_id", data.user_id);
+      localStorage.setItem("user_email", data.email);
       setSuccess(true);
-      
+
       // Redirect to home after 2 seconds
       setTimeout(() => {
         window.location.href = "/";
@@ -157,4 +159,3 @@ export default function SignupPage(): React.JSX.Element {
     </Layout>
   );
 }
-

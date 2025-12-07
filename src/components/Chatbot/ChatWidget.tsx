@@ -6,7 +6,8 @@
 
 import React, { useEffect, useRef, useState } from "react";
 
-import ChatInterface from "./ChatInterface";
+import ChatInterface, { ChatInterfaceRef } from "./ChatInterface";
+import { ChatbotProvider } from "./ChatbotContext";
 import styles from "./ChatWidget.module.css";
 
 interface ChatWidgetProps {
@@ -14,13 +15,14 @@ interface ChatWidgetProps {
   userId?: string;
 }
 
-const ChatWidget: React.FC<ChatWidgetProps> = ({
+const ChatWidgetInner: React.FC<ChatWidgetProps> = ({
   apiUrl = "http://localhost:8000",
   userId = "anonymous",
 }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [isMinimized, setIsMinimized] = useState(false);
   const widgetRef = useRef<HTMLDivElement>(null);
+  const chatInterfaceRef = useRef<ChatInterfaceRef>(null);
 
   const toggleWidget = () => {
     setIsOpen(!isOpen);
@@ -30,6 +32,34 @@ const ChatWidget: React.FC<ChatWidgetProps> = ({
   const minimizeWidget = () => {
     setIsMinimized(true);
   };
+
+  // Listen for external messages to send to chatbot
+  useEffect(() => {
+    const handleSendMessage = (event: CustomEvent) => {
+      const { message, selectedText } = event.detail;
+      setIsOpen(true);
+      setIsMinimized(false);
+      // Small delay to ensure widget is open and ref is ready
+      setTimeout(() => {
+        if (chatInterfaceRef.current) {
+          chatInterfaceRef.current.sendMessage(message, selectedText);
+        }
+      }, 200);
+    };
+
+    const handleOpen = () => {
+      setIsOpen(true);
+      setIsMinimized(false);
+    };
+
+    window.addEventListener("chatbot:send-message", handleSendMessage as EventListener);
+    window.addEventListener("chatbot:open", handleOpen);
+
+    return () => {
+      window.removeEventListener("chatbot:send-message", handleSendMessage as EventListener);
+      window.removeEventListener("chatbot:open", handleOpen);
+    };
+  }, []);
 
   // Close widget when clicking outside
   useEffect(() => {
@@ -75,7 +105,11 @@ const ChatWidget: React.FC<ChatWidgetProps> = ({
               </button>
             </div>
           </div>
-          <ChatInterface apiUrl={apiUrl} userId={userId} />
+          <ChatInterface 
+            ref={chatInterfaceRef}
+            apiUrl={apiUrl} 
+            userId={userId} 
+          />
         </div>
       )}
       {isOpen && isMinimized && (
@@ -129,6 +163,14 @@ const ChatWidget: React.FC<ChatWidgetProps> = ({
         </button>
       )}
     </div>
+  );
+};
+
+const ChatWidget: React.FC<ChatWidgetProps> = (props) => {
+  return (
+    <ChatbotProvider>
+      <ChatWidgetInner {...props} />
+    </ChatbotProvider>
   );
 };
 

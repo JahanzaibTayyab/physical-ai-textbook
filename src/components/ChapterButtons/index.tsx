@@ -1,23 +1,34 @@
 /**
  * Chapter buttons component.
- * 
+ *
  * Combines personalization and translation buttons for chapter pages.
  * This component can be imported in MDX files.
+ *
+ * Usage in MDX:
+ * ```mdx
+ * import ChapterButtons from '@site/src/components/ChapterButtons';
+ *
+ * <ChapterButtons chapterPath="/docs/module-1-ros2/intro" />
+ * ```
  */
 
-import React from "react";
 import PersonalizationButton from "../PersonalizationButton";
+import React from "react";
 import TranslationButton from "../TranslationButton";
 
 interface ChapterButtonsProps {
   chapterPath: string;
-  originalContent: string;
+  getContent?: () => string; // Function to get current page content
 }
 
 export default function ChapterButtons({
   chapterPath,
-  originalContent,
+  getContent,
 }: ChapterButtonsProps): React.JSX.Element {
+  // Get content from the page if function provided, otherwise use empty string
+  // In MDX, we'll pass the content directly
+  const originalContent = getContent ? getContent() : "";
+
   return (
     <div style={{ marginBottom: "2rem" }}>
       <PersonalizationButton
@@ -31,4 +42,3 @@ export default function ChapterButtons({
     </div>
   );
 }
-

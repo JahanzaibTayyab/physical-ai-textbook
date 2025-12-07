@@ -7,6 +7,7 @@
 
 import ChatWidget from "./ChatWidget";
 import React from "react";
+import TextSelectionMenu from "../TextSelectionMenu";
 import { createRoot } from "react-dom/client";
 
 // Client modules execute as side effects
@@ -22,13 +23,20 @@ if (typeof window !== "undefined") {
     root.id = "chatbot-widget-root";
     document.body.appendChild(root);
 
-    // Render the chatbot
+    // Render the chatbot and text selection menu
     const reactRoot = createRoot(root);
     reactRoot.render(
-      React.createElement(ChatWidget, {
-        apiUrl: "http://localhost:8000",
-        userId: localStorage.getItem("userId") || "anonymous",
-      })
+      React.createElement(
+        React.Fragment,
+        null,
+        React.createElement(ChatWidget, {
+          apiUrl: "http://localhost:8000",
+          userId: localStorage.getItem("userId") || "anonymous",
+        }),
+        React.createElement(TextSelectionMenu, {
+          apiUrl: "http://localhost:8000",
+        })
+      )
     );
   };
 

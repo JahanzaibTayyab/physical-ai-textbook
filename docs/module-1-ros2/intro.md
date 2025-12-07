@@ -4,6 +4,19 @@ title: "Introduction to ROS 2"
 description: "Learn the fundamentals of ROS 2, the robotic operating system that serves as the nervous system for humanoid robots"
 ---
 
+import PersonalizationButton from '@site/src/components/PersonalizationButton';
+import TranslationButton from '@site/src/components/TranslationButton';
+
+<PersonalizationButton 
+  chapterPath="/docs/module-1-ros2/intro"
+  originalContent="Welcome to Module 1: The Robotic Nervous System. In this module, you'll learn about ROS 2 (Robot Operating System 2), the middleware framework that enables communication and coordination between different components of a robot system. ROS 2 is an open-source robotics middleware framework that provides a set of software libraries and tools to help you build robot applications. Think of ROS 2 as the nervous system of a robot—it allows different parts of the robot (sensors, actuators, processors) to communicate and work together seamlessly."
+/>
+
+<TranslationButton 
+  chapterPath="/docs/module-1-ros2/intro"
+  originalContent="Welcome to Module 1: The Robotic Nervous System. In this module, you'll learn about ROS 2 (Robot Operating System 2), the middleware framework that enables communication and coordination between different components of a robot system. ROS 2 is an open-source robotics middleware framework that provides a set of software libraries and tools to help you build robot applications. Think of ROS 2 as the nervous system of a robot—it allows different parts of the robot (sensors, actuators, processors) to communicate and work together seamlessly."
+/>
+
 # Introduction to ROS 2
 
 Welcome to Module 1: The Robotic Nervous System. In this module, you'll learn about ROS 2 (Robot Operating System 2), the middleware framework that enables communication and coordination between different components of a robot system.

@@ -61,3 +61,23 @@
   text-align: right;
 }
 
+.successMessage {
+  margin-top: 1rem;
+  padding: 1rem;
+  background: var(--ifm-color-success-contrast-background);
+  border: 1px solid var(--ifm-color-success);
+  border-radius: 8px;
+  color: var(--ifm-color-success-dark);
+}
+
+.successMessage p {
+  margin: 0.5rem 0;
+  font-size: 0.9rem;
+}
+
+.hint {
+  font-size: 0.85rem !important;
+  color: var(--ifm-color-emphasis-600);
+  font-style: italic;
+}
+

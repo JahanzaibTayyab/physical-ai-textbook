@@ -67,6 +67,23 @@ export default function TranslationButton({
       const data = await response.json();
       setTranslatedContent(data.translated_content);
       setIsTranslated(true);
+
+      // Send translated content to chatbot
+      // Open chatbot and send a message asking about the translation
+      const chatbotMessage = `I just translated this content to Urdu. Can you help me understand it better?\n\n${data.translated_content.substring(0, 500)}${data.translated_content.length > 500 ? '...' : ''}`;
+      
+      // Dispatch event to open chatbot and send message
+      window.dispatchEvent(
+        new CustomEvent("chatbot:send-message", {
+          detail: {
+            message: chatbotMessage,
+            selectedText: data.translated_content,
+          },
+        })
+      );
+      
+      // Also open the chatbot
+      window.dispatchEvent(new CustomEvent("chatbot:open"));
     } catch (err) {
       setError(err instanceof Error ? err.message : "Failed to translate content");
     } finally {
@@ -103,8 +120,12 @@ export default function TranslationButton({
           : "Translate to Urdu"}
       </button>
       {error && <div className={styles.error}>{error}</div>}
-      {/* Note: Translated content should replace the chapter content, not be displayed here */}
-      {/* This component is meant to be used in MDX files where content replacement happens */}
+      {isTranslated && translatedContent && (
+        <div className={styles.successMessage}>
+          <p>✓ Content translated! The chatbot has been opened with the translated content.</p>
+          <p className={styles.hint}>You can ask questions about the translation in the chatbot.</p>
+        </div>
+      )}
     </div>
   );
 }

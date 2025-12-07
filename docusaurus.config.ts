@@ -65,11 +65,6 @@ const config: Config = {
         theme: {
           customCss: "./src/css/custom.css",
         },
-        // Enable MDX for React components in markdown
-        mdx: {
-          remarkPlugins: [],
-          rehypePlugins: [],
-        },
       } satisfies Preset.Options,
     ],
   ],
@@ -93,6 +88,16 @@ const config: Config = {
           sidebarId: "courseSidebar",
           position: "left",
           label: "Course",
+        },
+        {
+          href: "/signin",
+          label: "Sign In",
+          position: "right",
+        },
+        {
+          href: "/signup",
+          label: "Sign Up",
+          position: "right",
         },
         {
           type: "localeDropdown",
