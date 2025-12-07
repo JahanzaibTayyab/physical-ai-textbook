@@ -17,8 +17,8 @@ const config: Config = {
   // Set the production url of your site here
   url: "https://your-username.github.io", // Update with your GitHub username
   // Set the /<baseUrl>/ pathname under which your site is served
-  // For GitHub pages deployment, it is often '/<projectName>/'
-  baseUrl: "/physical-ai-textbook/", // Update with your repo name
+  // For local development, use "/". For GitHub pages, use "/<projectName>/"
+  baseUrl: "/",
 
   // GitHub pages deployment config.
   // If you aren't using GitHub pages, you don't need these.
@@ -31,8 +31,8 @@ const config: Config = {
   // useful metadata like html lang. For example, if your site is Chinese, you
   // may want to replace "en" with "zh-Hans".
   i18n: {
-    defaultLocale: "en",
-    locales: ["en", "ur"], // English and Urdu for translation feature
+    defaultLocale: "en", // English as default language
+    locales: ["en", "ur"], // English first, then Urdu
   },
 
   presets: [
@@ -41,7 +41,7 @@ const config: Config = {
       {
         docs: {
           sidebarPath: "./sidebars.ts",
-          routeBasePath: "/", // Serve docs at root
+          routeBasePath: "/docs", // Serve docs at /docs
           // Please change this to your repo.
           // Remove this to remove the "edit this page" links.
           editUrl:

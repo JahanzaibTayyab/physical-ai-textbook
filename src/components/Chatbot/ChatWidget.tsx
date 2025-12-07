@@ -55,12 +55,13 @@ const ChatWidget: React.FC<ChatWidgetProps> = ({
       {isOpen && !isMinimized && (
         <div className={styles.chatWidget}>
           <div className={styles.chatWidgetHeader}>
-            <h3 className={styles.chatWidgetTitle}>📚 Textbook Assistant</h3>
+            <h3 className={styles.chatWidgetTitle}>AI Assistant</h3>
             <div className={styles.chatWidgetActions}>
               <button
                 className={styles.minimizeButton}
                 onClick={minimizeWidget}
                 aria-label="Minimize"
+                title="Minimize"
               >
                 −
               </button>
@@ -68,6 +69,7 @@ const ChatWidget: React.FC<ChatWidgetProps> = ({
                 className={styles.closeButton}
                 onClick={toggleWidget}
                 aria-label="Close"
+                title="Close"
               >
                 ×
               </button>
@@ -82,8 +84,23 @@ const ChatWidget: React.FC<ChatWidgetProps> = ({
             className={styles.expandButton}
             onClick={() => setIsMinimized(false)}
             aria-label="Expand"
+            title="Expand Chat"
           >
-            📚
+            <svg
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M20 2H4C2.9 2 2 2.9 2 4V22L6 18H20C21.1 18 22 17.1 22 16V4C22 2.9 21.1 2 20 2Z"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+            </svg>
           </button>
         </div>
       )}
@@ -92,8 +109,23 @@ const ChatWidget: React.FC<ChatWidgetProps> = ({
           className={styles.toggleButton}
           onClick={toggleWidget}
           aria-label="Open chatbot"
+          title="Ask AI Assistant"
         >
-          💬
+          <svg
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M20 2H4C2.9 2 2 2.9 2 4V22L6 18H20C21.1 18 22 17.1 22 16V4C22 2.9 21.1 2 20 2Z"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+          </svg>
         </button>
       )}
     </div>

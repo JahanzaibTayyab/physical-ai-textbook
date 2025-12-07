@@ -114,7 +114,7 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ apiUrl, userId }) => {
     <div className={styles.chatInterface}>
       {selectedText && (
         <div className={styles.selectedTextBanner}>
-          <span>📝 Answering about selected text</span>
+          <span>Answering about selected text</span>
           <button
             className={styles.clearSelectionButton}
             onClick={() => setSelectedText(null)}

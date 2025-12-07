@@ -7,21 +7,40 @@
 
 import ChatWidget from "./ChatWidget";
 import React from "react";
+import { createRoot } from "react-dom/client";
 
-export default function ChatbotClientModule() {
-  // Only render in browser
-  if (typeof window === "undefined") {
-    return null;
+// Client modules execute as side effects
+if (typeof window !== "undefined") {
+  const initChatbot = () => {
+    // Check if already initialized
+    if (document.getElementById("chatbot-widget-root")) {
+      return;
+    }
+
+    // Create root container
+    const root = document.createElement("div");
+    root.id = "chatbot-widget-root";
+    document.body.appendChild(root);
+
+    // Render the chatbot
+    const reactRoot = createRoot(root);
+    reactRoot.render(
+      React.createElement(ChatWidget, {
+        apiUrl: "http://localhost:8000",
+        userId: localStorage.getItem("userId") || "anonymous",
+      })
+    );
+  };
+
+  // Initialize when DOM is ready
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", initChatbot);
+  } else {
+    setTimeout(initChatbot, 100);
   }
+}
 
-  return (
-    <ChatWidget
-      apiUrl={process.env.REACT_APP_CHATBOT_API_URL || "http://localhost:8000"}
-      userId={
-        typeof window !== "undefined"
-          ? localStorage.getItem("userId") || "anonymous"
-          : "anonymous"
-      }
-    />
-  );
+// Default export required by Docusaurus (can be empty)
+export default function ChatbotClientModule() {
+  return null;
 }

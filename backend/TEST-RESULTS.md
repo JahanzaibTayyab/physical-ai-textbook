@@ -3,6 +3,7 @@
 ## Backend Tests
 
 ### Health Check
+
 ```bash
 curl http://localhost:8000/health
 ```
@@ -10,6 +11,7 @@ curl http://localhost:8000/health
 **Expected**: `{"status":"ok"}`
 
 ### Root Endpoint
+
 ```bash
 curl http://localhost:8000/
 ```
@@ -17,6 +19,7 @@ curl http://localhost:8000/
 **Expected**: `{"message":"Physical AI Textbook RAG Chatbot API is running!"}`
 
 ### Chat Query Test
+
 ```bash
 curl -X POST http://localhost:8000/api/chat/query \
   -H "Content-Type: application/json" \
@@ -26,6 +29,7 @@ curl -X POST http://localhost:8000/api/chat/query \
 **Expected**: JSON response with `response` field containing answer about ROS 2
 
 ### Selected Text Query Test
+
 ```bash
 curl -X POST http://localhost:8000/api/chat/query \
   -H "Content-Type: application/json" \
@@ -41,6 +45,7 @@ curl -X POST http://localhost:8000/api/chat/query \
 ## Frontend Tests
 
 ### Docusaurus Build
+
 ```bash
 cd physical-ai-textbook
 pnpm run build
@@ -49,6 +54,7 @@ pnpm run build
 **Expected**: Successful build with no errors
 
 ### Development Server
+
 ```bash
 pnpm start
 ```
@@ -56,6 +62,7 @@ pnpm start
 **Expected**: Server starts on `http://localhost:3000`
 
 ### Chatbot Widget
+
 1. Open `http://localhost:3000` in browser
 2. Look for chatbot widget in bottom-right corner
 3. Click to open chat interface
@@ -64,18 +71,21 @@ pnpm start
 ## End-to-End Test Flow
 
 1. **Start Backend**:
+
    ```bash
    cd backend
    uv run uvicorn rag_chatbot_backend.api.main:app --reload
    ```
 
 2. **Start Frontend** (in another terminal):
+
    ```bash
    cd physical-ai-textbook
    pnpm start
    ```
 
 3. **Test in Browser**:
+
    - Navigate to `http://localhost:3000`
    - Open chatbot widget
    - Ask: "What is ROS 2?"

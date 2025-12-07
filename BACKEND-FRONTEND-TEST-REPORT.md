@@ -8,20 +8,25 @@
 ## Backend Tests
 
 ### 1. Health Check ✅
+
 ```bash
 curl http://localhost:8000/health
 ```
+
 **Result**: `{"status":"healthy"}`  
 **Status**: ✅ PASSED
 
 ### 2. Root Endpoint ✅
+
 ```bash
 curl http://localhost:8000/
 ```
+
 **Result**: `{"message":"Physical AI Textbook RAG Chatbot API"}`  
 **Status**: ✅ PASSED
 
 ### 3. Chat Query Endpoint ✅
+
 ```bash
 curl -X POST http://localhost:8000/api/chat/query \
   -H "Content-Type: application/json" \
@@ -29,6 +34,7 @@ curl -X POST http://localhost:8000/api/chat/query \
 ```
 
 **Expected Response**:
+
 ```json
 {
   "answer": "...",
@@ -43,28 +49,34 @@ curl -X POST http://localhost:8000/api/chat/query \
 ## Frontend Tests
 
 ### 1. Docusaurus Build ✅
+
 ```bash
 pnpm run build
 ```
+
 **Result**: Build successful  
 **Status**: ✅ PASSED
 
 ### 2. Development Server ✅
+
 ```bash
 pnpm start
 ```
+
 **Result**: Server running on `http://localhost:3000`  
 **Status**: ✅ PASSED
 
 ### 3. Chatbot Widget Integration ✅
+
 - Widget appears on all pages
 - Client module registered in `docusaurus.config.ts`
 - React components loaded
-**Status**: ✅ PASSED
+  **Status**: ✅ PASSED
 
 ## Issues Fixed
 
 ### 1. SQLAlchemySession Parameter
+
 **Issue**: `SQLAlchemySession.__init__() got an unexpected keyword argument 'user_id'`  
 **Fix**: Changed to use `session_id` parameter instead  
 **Status**: ✅ FIXED
@@ -72,12 +84,14 @@ pnpm start
 ## Server Status
 
 ### Backend (Port 8000)
+
 - ✅ Uvicorn server running
 - ✅ FastAPI application loaded
 - ✅ All endpoints responding
 - ✅ CORS configured
 
 ### Frontend (Port 3000)
+
 - ✅ Docusaurus server running
 - ✅ React components loaded
 - ✅ Chatbot widget integrated
@@ -86,11 +100,13 @@ pnpm start
 ## Next Steps
 
 1. **Test in Browser**:
+
    - Open `http://localhost:3000`
    - Click chatbot widget
    - Ask questions about textbook content
 
 2. **Test Selected Text**:
+
    - Select text on any page
    - Ask question about selected text
    - Verify answer uses only selected text
@@ -103,4 +119,3 @@ pnpm start
 ## Status: ✅ READY FOR USE
 
 Both backend and frontend are running and ready for testing!
-
