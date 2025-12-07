@@ -45,7 +45,7 @@ const config: Config = {
           // Please change this to your repo.
           // Remove this to remove the "edit this page" links.
           editUrl:
-            "https://github.com/your-username/physical-ai-textbook/tree/main/", // Update with your repo
+            "https://github.com/JahanzaibTayyab/physical-ai-textbook/tree/main/",
         },
         blog: {
           showReadingTime: true,
@@ -56,7 +56,7 @@ const config: Config = {
           // Please change this to your repo.
           // Remove this to remove the "edit this page" links.
           editUrl:
-            "https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/",
+            "https://github.com/JahanzaibTayyab/physical-ai-textbook/tree/main/",
           // Useful options to enforce blogging best practices
           onInlineTags: "warn",
           onInlineAuthors: "warn",
@@ -103,11 +103,11 @@ const config: Config = {
           type: "localeDropdown",
           position: "right",
         },
-            {
-              href: "https://github.com/JahanzaibTayyab/physical-ai-textbook",
-              label: "GitHub",
-              position: "right",
-            },
+        {
+          href: "https://github.com/JahanzaibTayyab/physical-ai-textbook",
+          label: "GitHub",
+          position: "right",
+        },
       ],
     },
     footer: {

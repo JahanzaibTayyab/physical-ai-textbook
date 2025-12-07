@@ -192,4 +192,4 @@ Congratulations! You've completed the Physical AI & Humanoid Robotics course. Yo
 
 Continue building and experimenting!
 
-[Back to Course Introduction →](/intro)
+[Back to Course Introduction →](/docs/intro)
