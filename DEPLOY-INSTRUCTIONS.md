@@ -5,16 +5,24 @@
 Your repository is configured for GitHub Pages deployment at:
 **https://github.com/JahanzaibTayyab/physical-ai-textbook**
 
-### Step 1: Enable GitHub Pages
+### Step 1: Enable GitHub Pages (REQUIRED)
 
-**IMPORTANT**: You must enable GitHub Pages before the workflow can deploy!
+**⚠️ CRITICAL**: You **MUST** enable GitHub Pages manually before the workflow can deploy!
 
-1. Go to: https://github.com/JahanzaibTayyab/physical-ai-textbook/settings/pages
-2. Under **Source**, select:
-   - **Source**: `GitHub Actions`
-3. Click **Save**
+The workflow cannot automatically enable Pages due to GitHub's security restrictions. You need to do this manually:
 
-**Note**: The workflow includes `enablement: true` which will automatically enable Pages if you have the right permissions, but it's recommended to enable it manually first.
+1. Go to your repository settings:
+
+   - **https://github.com/JahanzaibTayyab/physical-ai-textbook/settings/pages**
+
+2. Under **"Build and deployment"** → **"Source"**:
+
+   - Select: **`GitHub Actions`**
+   - Click **Save**
+
+3. **Important**: After enabling, wait a few seconds, then push your code again or manually trigger the workflow.
+
+**Why?** GitHub requires repository owner/admin permissions to enable Pages, which GitHub Actions doesn't have by default.
 
 ### Step 2: Push to GitHub
 
@@ -42,6 +50,7 @@ git push origin main
 ## ✅ Configuration Summary
 
 **Current Settings**:
+
 - **URL**: `https://jahanzaibtayyab.github.io`
 - **Base URL**: `/physical-ai-textbook/`
 - **Organization**: `JahanzaibTayyab`
@@ -110,4 +119,3 @@ After successful deployment:
 ---
 
 **Ready to deploy!** Just push to GitHub and the workflow will handle everything! 🚀
-
