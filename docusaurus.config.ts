@@ -15,15 +15,15 @@ const config: Config = {
   },
 
   // Set the production url of your site here
-  url: "https://your-username.github.io", // Update with your GitHub username
+  url: "https://jahanzaibtayyab.github.io", // GitHub Pages URL
   // Set the /<baseUrl>/ pathname under which your site is served
   // For local development, use "/". For GitHub pages, use "/<projectName>/"
-  baseUrl: "/",
+  baseUrl: "/physical-ai-textbook/",
 
   // GitHub pages deployment config.
   // If you aren't using GitHub pages, you don't need these.
-  organizationName: "your-username", // Update with your GitHub org/user name.
-  projectName: "physical-ai-textbook", // Usually your repo name.
+  organizationName: "JahanzaibTayyab", // GitHub username
+  projectName: "physical-ai-textbook", // Repository name
 
   onBrokenLinks: "throw",
 
@@ -103,11 +103,11 @@ const config: Config = {
           type: "localeDropdown",
           position: "right",
         },
-        {
-          href: "https://github.com/your-username/physical-ai-textbook", // Update with your repo
-          label: "GitHub",
-          position: "right",
-        },
+            {
+              href: "https://github.com/JahanzaibTayyab/physical-ai-textbook",
+              label: "GitHub",
+              position: "right",
+            },
       ],
     },
     footer: {
@@ -118,19 +118,19 @@ const config: Config = {
           items: [
             {
               label: "Module 1: ROS 2",
-              to: "/module-1-ros2/intro",
+              to: "/docs/module-1-ros2/intro",
             },
             {
               label: "Module 2: Gazebo & Unity",
-              to: "/module-2-simulation/intro",
+              to: "/docs/module-2-simulation/intro",
             },
             {
               label: "Module 3: NVIDIA Isaac",
-              to: "/module-3-isaac/intro",
+              to: "/docs/module-3-isaac/intro",
             },
             {
               label: "Module 4: VLA",
-              to: "/module-4-vla/intro",
+              to: "/docs/module-4-vla/intro",
             },
           ],
         },
@@ -156,7 +156,7 @@ const config: Config = {
           items: [
             {
               label: "GitHub",
-              href: "https://github.com/your-username/physical-ai-textbook", // Update with your repo
+              href: "https://github.com/JahanzaibTayyab/physical-ai-textbook",
             },
           ],
         },

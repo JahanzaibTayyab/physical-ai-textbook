@@ -34,10 +34,10 @@ jobs:
           version: 8
 
       - name: Install dependencies
-        run: pnpm install --frozen-lockfile
+        run: cd physical-ai-textbook && pnpm install --frozen-lockfile
 
       - name: Build website
-        run: pnpm run build
+        run: cd physical-ai-textbook && pnpm run build
         env:
           NODE_ENV: production
 
@@ -47,7 +47,7 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: build
+          path: physical-ai-textbook/build
 
   deploy:
     environment:

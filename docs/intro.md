@@ -45,7 +45,7 @@ Humanoid robots are poised to excel in our human-centered world because they sha
 
 ## Getting Started
 
-Navigate through the modules using the sidebar, or start with [Module 1: ROS 2 Fundamentals](/module-1-ros2/intro).
+Navigate through the modules using the sidebar, or start with [Module 1: ROS 2 Fundamentals](/docs/module-1-ros2/intro).
 
 :::tip Interactive Learning
 Use the integrated chatbot to ask questions about any content in this textbook. Simply select text and ask questions!
