@@ -9,10 +9,18 @@ from typing import List, Optional
 from qdrant_client import AsyncQdrantClient
 from qdrant_client.models import Distance, VectorParams, PointStruct
 
-# Qdrant configuration
-QDRANT_URL = os.getenv("QDRANT_URL")
-QDRANT_API_KEY = os.getenv("QDRANT_API_KEY")
+# Qdrant configuration (lazy loaded)
 COLLECTION_NAME = "textbook_chunks"
+
+def _get_qdrant_config():
+    """Get Qdrant configuration from environment (lazy loading)."""
+    url = os.getenv("QDRANT_URL")
+    api_key = os.getenv("QDRANT_API_KEY")
+    if not url or not api_key:
+        raise ValueError(
+            "QDRANT_URL and QDRANT_API_KEY environment variables are required"
+        )
+    return url, api_key
 
 
 class VectorService:
@@ -32,14 +40,14 @@ class VectorService:
             api_key: Qdrant API key (defaults to QDRANT_API_KEY env var)
             collection_name: Collection name for vectors
         """
-        self.url = url or QDRANT_URL
-        self.api_key = api_key or QDRANT_API_KEY
         self.collection_name = collection_name
         
-        if not self.url or not self.api_key:
-            raise ValueError(
-                "QDRANT_URL and QDRANT_API_KEY environment variables are required"
-            )
+        # Lazy load config if not provided
+        if url and api_key:
+            self.url = url
+            self.api_key = api_key
+        else:
+            self.url, self.api_key = _get_qdrant_config()
         
         self.client = AsyncQdrantClient(
             url=self.url,

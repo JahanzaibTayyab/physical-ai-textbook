@@ -10,6 +10,7 @@ import asyncio
 import os
 import sys
 import hashlib
+import uuid
 from pathlib import Path
 from datetime import datetime
 from typing import List
@@ -155,10 +156,13 @@ async def process_document(
     for idx, (chunk, embedding) in enumerate(zip(chunks, embeddings)):
         await session.refresh(chunk)
         
-        # Create Qdrant point
-        point_id = f"{document.id}_{chunk.id}"
+        # Create Qdrant point with UUID (Qdrant requires UUID or integer)
+        # Use hash of document_id and chunk_id to generate consistent UUID
+        point_id_str = f"{document.id}_{chunk.id}"
+        point_id_uuid = uuid.uuid5(uuid.NAMESPACE_DNS, point_id_str)
+        
         point = PointStruct(
-            id=point_id,
+            id=str(point_id_uuid),  # Qdrant accepts UUID strings
             vector=embedding,
             payload={
                 "chunk_id": chunk.id,
@@ -170,8 +174,8 @@ async def process_document(
         )
         points.append(point)
         
-        # Update chunk with embedding ID
-        chunk.embedding_id = point_id
+        # Update chunk with embedding ID (store UUID string)
+        chunk.embedding_id = str(point_id_uuid)
     
     # Upsert to Qdrant in batch
     if points:

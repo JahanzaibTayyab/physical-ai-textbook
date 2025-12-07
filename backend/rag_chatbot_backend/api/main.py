@@ -41,13 +41,28 @@ DATABASE_URL = os.getenv("NEON_DATABASE_URL")
 if not DATABASE_URL:
     raise ValueError("NEON_DATABASE_URL environment variable is required")
 
-# Ensure asyncpg driver
+# Ensure asyncpg driver and clean URL (remove unsupported params)
 if not DATABASE_URL.startswith("postgresql+asyncpg://"):
     if DATABASE_URL.startswith("postgresql://"):
         DATABASE_URL = DATABASE_URL.replace("postgresql://", "postgresql+asyncpg://", 1)
 
+# Remove unsupported parameters (asyncpg doesn't support sslmode, channel_binding)
+if "?" in DATABASE_URL:
+    base_url, params = DATABASE_URL.split("?", 1)
+    param_dict = {}
+    for param in params.split("&"):
+        if "=" in param:
+            key, value = param.split("=", 1)
+            # Keep only supported parameters
+            if key not in ["sslmode", "channel_binding"]:
+                param_dict[key] = value
+    if param_dict:
+        DATABASE_URL = base_url + "?" + "&".join(f"{k}={v}" for k, v in param_dict.items())
+    else:
+        DATABASE_URL = base_url
+
 # Create engine for SQLAlchemy Sessions
-session_engine = create_async_engine(DATABASE_URL, echo=False)
+session_engine = create_async_engine(DATABASE_URL, echo=False, connect_args={"ssl": "require"})
 
 # Create agent with RAG tools
 agent = Agent(
@@ -111,9 +126,10 @@ async def query_chatbot(request: QueryRequest):
     start_time = time.time()
     
     try:
-        # Create or get session
+        # Create or get session (use session_id from request or user_id as fallback)
+        session_id = request.session_id or request.user_id
         session = SQLAlchemySession(
-            user_id=request.user_id,
+            session_id=session_id,
             engine=session_engine,
             create_tables=True,
         )

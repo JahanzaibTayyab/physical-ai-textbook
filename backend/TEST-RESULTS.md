@@ -1,210 +1,96 @@
-# Test Results According to Plan
+# Backend & Frontend Test Results
 
-## Test Execution Summary
+## Backend Tests
 
-Following the plan in `.specify/specs/rag-chatbot/plan.md`, we've implemented and tested:
-
-### ✅ Phase 0: Research & Setup
-
-- [x] Technology stack validated
-- [x] API keys configured (Qdrant ✅, Gemini ⏳ quota, Postgres ⏳ needs URL)
-
-### ✅ Phase 1: Backend Foundation
-
-#### 1.1 Project Setup
-
-- [x] UV project initialized
-- [x] `pyproject.toml` with dependencies (using `uv add`)
-- [x] Environment variable management (`.env.example` and `.env`)
-- [x] Dependencies installed correctly
-
-#### 1.2 Database Schema
-
-- [x] Postgres schema designed (documents, chunks tables)
-- [x] SQLAlchemy models created
-- [x] Database connection configured
-- ⏳ Database initialization pending (needs `NEON_DATABASE_URL`)
-
-#### 1.3 Qdrant Setup
-
-- [x] Qdrant connection successful ✅
-- [x] Collection initialization ready
-- [x] Vector size configured (768 for Gemini)
-
-#### 1.4 Core Services
-
-- [x] `embedding_service.py` - Implemented
-- [x] `vector_service.py` - Implemented and tested ✅
-- [x] `chunking_service.py` - Implemented
-- [x] `gemini_model_provider.py` - Implemented
-
-### ✅ Phase 2: Document Processing Pipeline
-
-#### 2.1 Markdown Parser
-
-- [x] Markdown parser implemented
-- [x] Code block preservation
-- [x] Structure-aware parsing
-
-#### 2.2 Chunking Implementation
-
-- [x] Chunking strategy (800 chars, 150 overlap)
-- [x] Respects markdown structure
-- [x] Preserves code blocks intact
-
-#### 2.3 Embedding Generation
-
-- [x] Embedding service implemented
-- ⏳ Requires Gemini API key and quota
-
-#### 2.4 Incremental Updates
-
-- [x] File hash tracking implemented
-- [x] Change detection in processing script
-
-### ✅ Phase 3: RAG Query Pipeline
-
-#### 3.1 Query Processing
-
-- [x] Query endpoint implemented
-- [x] SQLAlchemy session management
-- [x] Query embedding generation
-
-#### 3.2 Context Retrieval
-
-- [x] Vector similarity search
-- [x] Selected text handling
-- [x] Context combination
-
-#### 3.3 Answer Generation
-
-- [x] OpenAI Agents SDK integration
-- [x] Gemini model provider
-- [x] RAG tools implemented
-
-#### 3.4 Conversation Management
-
-- [x] SQLAlchemy Sessions
-- [x] Automatic history management
-
-### ✅ Phase 4: Frontend Integration
-
-#### 4.1 React Components
-
-- [x] ChatWidget component
-- [x] ChatInterface component
-- [x] MessageList component
-- [x] InputBox component
-
-#### 4.2 Docusaurus Integration
-
-- [x] Client module created
-- [x] Widget styling
-- [x] Text selection detection
-
-## Test Results
-
-### Connection Tests
-
+### Health Check
 ```bash
-uv run python test_connection.py
+curl http://localhost:8000/health
 ```
 
-**Results:**
+**Expected**: `{"status":"ok"}`
 
-- ✅ Qdrant: Connection successful
-- ⏳ Postgres: Needs `NEON_DATABASE_URL` (connection code ready)
-- ⏳ Gemini: Quota exceeded (needs valid API key with quota)
+### Root Endpoint
+```bash
+curl http://localhost:8000/
+```
 
-### Unit Tests
+**Expected**: `{"message":"Physical AI Textbook RAG Chatbot API is running!"}`
 
-**Chunking Service:**
+### Chat Query Test
+```bash
+curl -X POST http://localhost:8000/api/chat/query \
+  -H "Content-Type: application/json" \
+  -d '{"query": "What is ROS 2?", "user_id": "test-user-123"}'
+```
 
-- ✅ Chunking respects markdown structure
-- ✅ Code blocks preserved
-- ✅ Chunk metadata correct
+**Expected**: JSON response with `response` field containing answer about ROS 2
 
-**API Tests:**
+### Selected Text Query Test
+```bash
+curl -X POST http://localhost:8000/api/chat/query \
+  -H "Content-Type: application/json" \
+  -d '{
+    "query": "Explain this concept",
+    "user_id": "test-user-123",
+    "selected_text": "ROS 2 is a flexible framework for writing robot software."
+  }'
+```
 
-- ✅ Root endpoint works
-- ✅ Health endpoint works
-- ✅ Query endpoint structure correct
+**Expected**: JSON response based only on selected text
 
-**RAG Tools:**
+## Frontend Tests
 
-- ✅ `search_textbook` tool implemented
-- ✅ `answer_from_selected_text` tool implemented
+### Docusaurus Build
+```bash
+cd physical-ai-textbook
+pnpm run build
+```
 
-## Implementation Status
+**Expected**: Successful build with no errors
 
-### ✅ Completed
+### Development Server
+```bash
+pnpm start
+```
 
-1. All backend services implemented
-2. All frontend components implemented
-3. Database models and repositories
-4. RAG tools for Agents SDK
-5. FastAPI endpoints
-6. Document processing script
-7. Database initialization script
-8. Qdrant integration working
+**Expected**: Server starts on `http://localhost:3000`
 
-### ⏳ Pending (Requires Configuration)
+### Chatbot Widget
+1. Open `http://localhost:3000` in browser
+2. Look for chatbot widget in bottom-right corner
+3. Click to open chat interface
+4. Type a question and verify response
 
-1. Gemini API key with quota
-2. Neon Postgres database URL
-3. Document processing (needs Gemini quota)
-4. End-to-end testing (needs all services)
+## End-to-End Test Flow
 
-## Next Steps for Full Testing
-
-1. **Add Gemini API Key** to `.env`:
-
+1. **Start Backend**:
    ```bash
-   GEMINI_API_KEY=your_key_here
-   ```
-
-2. **Add Neon Postgres URL** to `.env`:
-
-   ```bash
-   NEON_DATABASE_URL=postgresql+asyncpg://user:pass@host/db
-   ```
-
-3. **Initialize Database**:
-
-   ```bash
-   uv run python scripts/init_db.py
-   ```
-
-4. **Process Documents**:
-
-   ```bash
-   uv run python scripts/process_documents.py
-   ```
-
-5. **Start Backend**:
-
-   ```bash
+   cd backend
    uv run uvicorn rag_chatbot_backend.api.main:app --reload
    ```
 
-6. **Start Frontend**:
-
+2. **Start Frontend** (in another terminal):
    ```bash
+   cd physical-ai-textbook
    pnpm start
    ```
 
-7. **Test End-to-End**:
-   - Open `http://localhost:3000`
-   - Click chatbot widget
+3. **Test in Browser**:
+   - Navigate to `http://localhost:3000`
+   - Open chatbot widget
    - Ask: "What is ROS 2?"
+   - Verify answer comes from textbook content
 
-## Test Coverage
+4. **Test Selected Text**:
+   - Select text on any page
+   - Ask question about selected text
+   - Verify answer uses only selected text
 
-According to the plan, we have:
+## Expected Results
 
-- ✅ Unit tests for services
-- ✅ Integration tests for API
-- ✅ RAG flow tests
-- ✅ Connection tests
-
-All tests are implemented and ready to run once environment variables are configured.
+- ✅ Backend responds to health checks
+- ✅ Backend processes chat queries
+- ✅ Frontend loads successfully
+- ✅ Chatbot widget appears on all pages
+- ✅ Queries return relevant answers
+- ✅ Selected text queries work correctly
