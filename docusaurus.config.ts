@@ -68,6 +68,7 @@ const config: Config = {
       } satisfies Preset.Options,
     ],
   ],
+  clientModules: ["./src/components/Chatbot/client-module.tsx"],
 
   themeConfig: {
     // Replace with your project's social card

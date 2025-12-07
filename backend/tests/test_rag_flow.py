@@ -10,9 +10,12 @@ from rag_chatbot_backend.services.rag_tools import search_textbook, answer_from_
 
 @pytest.mark.asyncio
 async def test_search_textbook_tool():
-    """Test search_textbook RAG tool."""
+    """Test search_textbook RAG tool implementation."""
+    # Test the underlying function directly
+    from rag_chatbot_backend.services.rag_tools import _search_textbook_impl
+    
     try:
-        result = await search_textbook("What is ROS 2?")
+        result = await _search_textbook_impl("What is ROS 2?")
         
         assert isinstance(result, str)
         assert len(result) > 0
@@ -28,8 +31,10 @@ async def test_search_textbook_tool():
 
 @pytest.mark.asyncio
 async def test_answer_from_selected_text_tool():
-    """Test answer_from_selected_text tool."""
-    result = await answer_from_selected_text(
+    """Test answer_from_selected_text tool implementation."""
+    from rag_chatbot_backend.services.rag_tools import _answer_from_selected_text_impl
+    
+    result = await _answer_from_selected_text_impl(
         "ROS 2 is a robotics framework",
         "What is ROS 2?"
     )

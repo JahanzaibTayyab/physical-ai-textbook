@@ -6,13 +6,12 @@ These tools allow the agent to search the textbook and answer questions.
 
 from typing import Annotated
 from agents import function_tool
-from ..services.embedding_service import embedding_service
+from ..services.embedding_service import get_embedding_service
 from ..services.vector_service import get_vector_service
 from ..database.repositories.chunk_repo import ChunkRepository
 
 
-@function_tool
-async def search_textbook(
+async def _search_textbook_impl(
     query: Annotated[str, "The user's question about the textbook"]
 ) -> str:
     """
@@ -28,8 +27,13 @@ async def search_textbook(
         Relevant context from the textbook
     """
     try:
-        # Generate query embedding
-        query_embedding = await embedding_service.generate_embedding(query)
+        # Generate query embedding (use RETRIEVAL_QUERY task type for queries)
+        embedding_service = get_embedding_service()
+        query_embedding = await embedding_service.generate_embedding(
+            query,
+            task_type="RETRIEVAL_QUERY",  # Use query task type for better results
+            output_dimensionality=768
+        )
         
         # Search in Qdrant
         vector_service = get_vector_service()
@@ -66,9 +70,10 @@ async def search_textbook(
     except Exception as e:
         return f"Error searching textbook: {str(e)}"
 
+# Create FunctionTool wrapper
+search_textbook = function_tool(_search_textbook_impl)
 
-@function_tool
-async def answer_from_selected_text(
+async def _answer_from_selected_text_impl(
     selected_text: Annotated[str, "The text selected by the user"],
     question: Annotated[str, "The question about the selected text"]
 ) -> str:
@@ -86,4 +91,7 @@ async def answer_from_selected_text(
         Answer based on the selected text only
     """
     return f"Based on the selected text:\n\n{selected_text}\n\nQuestion: {question}\n\nPlease answer based only on the information provided in the selected text above."
+
+# Create FunctionTool wrapper
+answer_from_selected_text = function_tool(_answer_from_selected_text_impl)
 

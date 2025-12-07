@@ -38,10 +38,12 @@ async def test_postgres():
     """Test Postgres connection."""
     print("\n🔍 Testing Postgres connection...")
     try:
-        from rag_chatbot_backend.database.connection import engine
+        from rag_chatbot_backend.database.connection import _get_engine
         
+        engine = _get_engine()
+        from sqlalchemy import text
         async with engine.begin() as conn:
-            await conn.execute("SELECT 1")
+            await conn.execute(text("SELECT 1"))
         print("  ✅ Postgres connection successful!")
         return True
     except Exception as e:

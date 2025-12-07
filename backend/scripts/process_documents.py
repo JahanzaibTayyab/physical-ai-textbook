@@ -21,15 +21,17 @@ sys.path.insert(0, str(Path(__file__).parent.parent))
 from sqlalchemy.ext.asyncio import AsyncSession
 from qdrant_client.models import PointStruct
 
-from rag_chatbot_backend.database.connection import AsyncSessionLocal, init_db
+from rag_chatbot_backend.database.connection import _get_session_local, init_db
 from rag_chatbot_backend.database.models import DocumentModel, ChunkModel
 from rag_chatbot_backend.services.chunking_service import chunking_service
-from rag_chatbot_backend.services.embedding_service import embedding_service
+from rag_chatbot_backend.services.embedding_service import get_embedding_service
 from rag_chatbot_backend.services.vector_service import get_vector_service
 from sqlalchemy import select
 
-# Load environment variables
-load_dotenv()
+# Load environment variables from .env file
+env_path = Path(__file__).parent.parent / ".env"
+load_dotenv(dotenv_path=env_path)
+load_dotenv()  # Also load from current directory
 
 # Path to docs directory (relative to project root)
 DOCS_DIR = Path(__file__).parent.parent.parent / "docs"
@@ -134,12 +136,24 @@ async def process_document(
     vector_service = get_vector_service()
     await vector_service.initialize_collection(vector_size=768)
     
+    # Batch generate embeddings for all chunks (more efficient, uses less quota)
+    embedding_service = get_embedding_service()
+    chunk_contents = [chunk.content for chunk in chunks]
+    
+    if not chunk_contents:
+        print(f"  ⚠️  No chunks to process for {relative_path}")
+        return document, chunks
+    
+    embeddings = await embedding_service.generate_embeddings_batch(
+        chunk_contents,
+        task_type="RETRIEVAL_DOCUMENT",
+        output_dimensionality=768
+    )
+    
+    # Create Qdrant points
     points = []
-    for chunk in chunks:
+    for idx, (chunk, embedding) in enumerate(zip(chunks, embeddings)):
         await session.refresh(chunk)
-        
-        # Generate embedding
-        embedding = await embedding_service.generate_embedding(chunk.content)
         
         # Create Qdrant point
         point_id = f"{document.id}_{chunk.id}"
@@ -159,7 +173,7 @@ async def process_document(
         # Update chunk with embedding ID
         chunk.embedding_id = point_id
     
-    # Upsert to Qdrant
+    # Upsert to Qdrant in batch
     if points:
         await vector_service.upsert_vectors(points)
     
@@ -190,6 +204,7 @@ async def main():
     print(f"\n📄 Found {len(markdown_files)} markdown files")
     
     # Process documents
+    AsyncSessionLocal = _get_session_local()
     async with AsyncSessionLocal() as session:
         for i, file_path in enumerate(markdown_files, 1):
             print(f"\n[{i}/{len(markdown_files)}] Processing {file_path.name}...")

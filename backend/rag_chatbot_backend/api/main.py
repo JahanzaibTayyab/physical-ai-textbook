@@ -14,7 +14,7 @@ from agents.extensions.memory import SQLAlchemySession
 from sqlalchemy.ext.asyncio import create_async_engine
 from dotenv import load_dotenv
 
-from ..services.gemini_model_provider import GEMINI_PROVIDER
+from ..services.gemini_model_provider import get_gemini_provider
 from ..services.rag_tools import search_textbook, answer_from_selected_text
 
 # Load environment variables
@@ -128,11 +128,12 @@ async def query_chatbot(request: QueryRequest):
             user_query = request.query
         
         # Run agent with Gemini provider
+        gemini_provider = get_gemini_provider()
         result = await Runner.run(
             agent,
             user_query,
             session=session,
-            run_config=RunConfig(model_provider=GEMINI_PROVIDER),
+            run_config=RunConfig(model_provider=gemini_provider),
         )
         
         response_time_ms = int((time.time() - start_time) * 1000)

@@ -39,17 +39,20 @@ Another paragraph here.
 @pytest.mark.asyncio
 async def test_embedding_service():
     """Test embedding generation."""
+    from rag_chatbot_backend.services.embedding_service import get_embedding_service
+    
     text = "This is a test document about ROS 2."
     
     try:
-        embedding = await embedding_service.generate_embedding(text)
+        service = get_embedding_service()
+        embedding = await service.generate_embedding(text)
         assert isinstance(embedding, list)
         assert len(embedding) == 768  # Gemini embedding dimension
         assert all(isinstance(x, float) for x in embedding)
     except Exception as e:
-        # Skip if quota exceeded
-        if "quota" in str(e).lower() or "429" in str(e):
-            pytest.skip(f"Gemini API quota exceeded: {e}")
+        # Skip if quota exceeded or API key missing
+        if "quota" in str(e).lower() or "429" in str(e) or "GEMINI_API_KEY" in str(e):
+            pytest.skip(f"Gemini API not available: {e}")
         raise
 
 

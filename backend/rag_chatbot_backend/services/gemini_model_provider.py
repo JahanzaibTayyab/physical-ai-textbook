@@ -17,16 +17,17 @@ from agents import Model, ModelProvider, OpenAIChatCompletionsModel
 
 # Gemini OpenAI-compatible endpoint
 GEMINI_BASE_URL = "https://generativelanguage.googleapis.com/v1beta/openai"
-GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
 
-if not GEMINI_API_KEY:
-    raise ValueError("GEMINI_API_KEY environment variable is required")
-
-# Create OpenAI client pointing to Gemini endpoint
-gemini_client = AsyncOpenAI(
-    base_url=GEMINI_BASE_URL,
-    api_key=GEMINI_API_KEY
-)
+def _get_gemini_client():
+    """Get or create Gemini client (lazy initialization)."""
+    GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
+    if not GEMINI_API_KEY:
+        raise ValueError("GEMINI_API_KEY environment variable is required")
+    
+    return AsyncOpenAI(
+        base_url=GEMINI_BASE_URL,
+        api_key=GEMINI_API_KEY
+    )
 
 
 class GeminiModelProvider(ModelProvider):
@@ -50,7 +51,14 @@ class GeminiModelProvider(ModelProvider):
                       Options: "gemini-2.5-flash", "gemini-2.5-pro", etc.
         """
         self.model_name = model_name
-        self.client = gemini_client
+        self._client = None
+    
+    @property
+    def client(self):
+        """Lazy-load client."""
+        if self._client is None:
+            self._client = _get_gemini_client()
+        return self._client
     
     def get_model(self, model_name: Optional[str] = None) -> Model:
         """
@@ -68,6 +76,13 @@ class GeminiModelProvider(ModelProvider):
         )
 
 
-# Global provider instance
-GEMINI_PROVIDER = GeminiModelProvider(model_name="gemini-2.5-flash")
+# Global provider instance (lazy initialization)
+_GEMINI_PROVIDER = None
+
+def get_gemini_provider():
+    """Get or create global Gemini provider."""
+    global _GEMINI_PROVIDER
+    if _GEMINI_PROVIDER is None:
+        _GEMINI_PROVIDER = GeminiModelProvider(model_name="gemini-2.5-flash")
+    return _GEMINI_PROVIDER
 

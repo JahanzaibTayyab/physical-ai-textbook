@@ -30,7 +30,8 @@ class ChunkRepository:
             Chunk if found, None otherwise
         """
         if not self.session:
-            from ..connection import AsyncSessionLocal
+            from ..connection import _get_session_local
+            AsyncSessionLocal = _get_session_local()
             async with AsyncSessionLocal() as session:
                 stmt = select(ChunkModel).where(ChunkModel.id == chunk_id)
                 result = await session.execute(stmt)
@@ -59,7 +60,8 @@ class ChunkRepository:
             List of chunks
         """
         if not self.session:
-            from ..connection import AsyncSessionLocal
+            from ..connection import _get_session_local
+            AsyncSessionLocal = _get_session_local()
             async with AsyncSessionLocal() as session:
                 stmt = select(ChunkModel).where(
                     ChunkModel.embedding_id.in_(embedding_ids)
