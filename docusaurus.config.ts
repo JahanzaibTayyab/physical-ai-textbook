@@ -65,6 +65,11 @@ const config: Config = {
         theme: {
           customCss: "./src/css/custom.css",
         },
+        // Enable MDX for React components in markdown
+        mdx: {
+          remarkPlugins: [],
+          rehypePlugins: [],
+        },
       } satisfies Preset.Options,
     ],
   ],

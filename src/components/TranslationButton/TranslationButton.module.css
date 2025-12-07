@@ -1,0 +1,63 @@
+/* Translation Button Styles */
+
+.container {
+  margin: 2rem 0;
+  padding: 1rem;
+  background: var(--ifm-color-info-contrast-background);
+  border: 1px solid var(--ifm-color-info);
+  border-radius: 8px;
+}
+
+.button {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.25rem;
+  background: var(--ifm-color-primary);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.button:hover:not(:disabled) {
+  background: var(--ifm-color-primary-dark);
+  transform: translateY(-1px);
+}
+
+.button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.button.active {
+  background: var(--ifm-color-success);
+}
+
+.icon {
+  font-size: 1.2rem;
+}
+
+.error {
+  margin-top: 0.75rem;
+  padding: 0.75rem;
+  background: #fee;
+  border: 1px solid #fcc;
+  border-radius: 6px;
+  color: #c33;
+  font-size: 0.9rem;
+}
+
+.translatedContent {
+  margin-top: 1.5rem;
+  padding: 1.5rem;
+  background: var(--ifm-background-color);
+  border: 1px solid var(--ifm-color-emphasis-300);
+  border-radius: 8px;
+  direction: rtl; /* Right-to-left for Urdu */
+  text-align: right;
+}
+

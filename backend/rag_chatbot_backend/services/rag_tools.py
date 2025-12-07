@@ -48,19 +48,27 @@ async def search_textbook(
         context_parts = []
         
         for result in results:
-            # Qdrant returns payload with chunk_id or we use the point ID
-            payload = result.get("payload", {})
-            chunk_id = payload.get("chunk_id")
-            if not chunk_id and result.get("id"):
-                # Try to get chunk by embedding_id (Qdrant point ID)
-                embedding_id = str(result["id"])
-                chunks = await chunk_repo.get_by_embedding_ids([embedding_id])
-                if chunks:
-                    context_parts.append(chunks[0].content)
-            elif chunk_id:
-                chunk = await chunk_repo.get_by_id(chunk_id)
-                if chunk:
-                    context_parts.append(chunk.content)
+            try:
+                # Qdrant returns payload with chunk_id or we use the point ID
+                payload = result.get("payload", {})
+                chunk_id = payload.get("chunk_id")
+                
+                if chunk_id:
+                    # Try to get chunk by ID first (most reliable)
+                    chunk = await chunk_repo.get_by_id(chunk_id)
+                    if chunk:
+                        context_parts.append(chunk.content)
+                        continue
+                
+                # Fallback: try to get chunk by embedding_id (Qdrant point ID)
+                if result.get("id"):
+                    embedding_id = str(result["id"])
+                    chunks = await chunk_repo.get_by_embedding_ids([embedding_id])
+                    if chunks:
+                        context_parts.append(chunks[0].content)
+            except Exception as e:
+                print(f"Error retrieving chunk for result {result.get('id', 'unknown')}: {e}")
+                continue
         
         if not context_parts:
             return "No relevant information found in the textbook."
@@ -69,7 +77,10 @@ async def search_textbook(
         return f"Relevant context from the textbook:\n\n{context}"
     
     except Exception as e:
-        return f"Error searching textbook: {str(e)}"
+        import traceback
+        error_details = traceback.format_exc()
+        print(f"Error in search_textbook: {error_details}")  # Log for debugging
+        return f"Error searching textbook: {str(e)}. Please check the backend logs for details."
 
 @function_tool
 async def answer_from_selected_text(

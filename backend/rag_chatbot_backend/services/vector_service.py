@@ -107,19 +107,20 @@ class VectorService:
             List of search results with id, score, and payload
         """
         try:
-            results = await self.client.search(
+            # Use query_points for async client - pass vector directly
+            results = await self.client.query_points(
                 collection_name=self.collection_name,
-                query_vector=query_vector,
+                query=query_vector,  # Pass vector directly
                 limit=limit,
             )
             
             return [
                 {
-                    "id": result.id,
-                    "score": result.score,
-                    "payload": result.payload,
+                    "id": str(point.id),  # Convert to string for consistency
+                    "score": point.score,
+                    "payload": point.payload or {},
                 }
-                for result in results
+                for point in results.points
             ]
         except Exception as e:
             raise RuntimeError(f"Failed to search vectors: {e}")

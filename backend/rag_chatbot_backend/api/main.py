@@ -5,7 +5,7 @@ Provides endpoints for the RAG chatbot.
 """
 
 import os
-import os
+from typing import Optional
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
@@ -16,6 +16,9 @@ from dotenv import load_dotenv
 
 from ..services.gemini_model_provider import get_gemini_provider
 from ..services.rag_tools import search_textbook, answer_from_selected_text
+from .auth import router as auth_router
+from .personalization import router as personalization_router
+from .translation import router as translation_router
 
 # Load environment variables
 load_dotenv()
@@ -35,6 +38,11 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+# Include routers
+app.include_router(auth_router)
+app.include_router(personalization_router)
+app.include_router(translation_router)
 
 # Database URL for SQLAlchemy Sessions
 DATABASE_URL = os.getenv("NEON_DATABASE_URL")
@@ -87,16 +95,16 @@ class QueryRequest(BaseModel):
     """Query request model."""
     query: str
     user_id: str
-    selected_text: str = None
-    session_id: str = None
+    selected_text: Optional[str] = None
+    session_id: Optional[str] = None
 
 
 class QueryResponse(BaseModel):
     """Query response model."""
     answer: str
     session_id: str
-    sources: list = None
-    response_time_ms: int = None
+    sources: Optional[list] = None
+    response_time_ms: Optional[int] = None
 
 
 @app.get("/")

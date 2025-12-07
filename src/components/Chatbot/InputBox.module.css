@@ -62,6 +62,19 @@
 .sendButton svg {
   width: 18px;
   height: 18px;
+  display: block;
+  flex-shrink: 0;
+  color: inherit;
+}
+
+.sendButton svg path {
+  stroke: currentColor;
+  fill: none;
+  stroke-width: 2.5;
+}
+
+.sendButton:disabled svg {
+  opacity: 0.6;
 }
 
 .sendButton:hover:not(:disabled) {

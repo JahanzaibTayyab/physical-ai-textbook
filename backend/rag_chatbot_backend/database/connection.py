@@ -77,7 +77,10 @@ async def get_db_engine():
 
 async def init_db():
     """Initialize database tables."""
-    from .models import DocumentModel, ChunkModel  # Import models to register them
+    from .models import (
+        DocumentModel, ChunkModel, UserModel, UserProfileModel,
+        PersonalizedContentModel, TranslationModel
+    )  # Import models to register them
     
     engine = _get_engine()
     async with engine.begin() as conn:
@@ -92,4 +95,10 @@ async def get_session() -> AsyncSession:
             yield session
         finally:
             await session.close()
+
+
+# Dependency for FastAPI
+def get_db():
+    """Dependency for FastAPI to get database session."""
+    return get_session()
 
