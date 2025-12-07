@@ -24,15 +24,19 @@ By the end of this course, you will be able to:
 ## Course Modules
 
 ### Module 1: The Robotic Nervous System (ROS 2)
+
 Learn the middleware for robot control, including ROS 2 Nodes, Topics, Services, and how to bridge Python Agents to ROS controllers.
 
 ### Module 2: The Digital Twin (Gazebo & Unity)
+
 Master physics simulation and environment building, including sensor simulation (LiDAR, Depth Cameras, IMUs).
 
 ### Module 3: The AI-Robot Brain (NVIDIA Isaac)
+
 Explore advanced perception and training with NVIDIA Isaac Sim, Isaac ROS, and Nav2 for bipedal humanoid movement.
 
 ### Module 4: Vision-Language-Action (VLA)
+
 Discover the convergence of LLMs and Robotics, including voice-to-action with OpenAI Whisper and cognitive planning.
 
 ## Why Physical AI Matters
@@ -48,5 +52,5 @@ Use the integrated chatbot to ask questions about any content in this textbook. 
 :::
 
 :::info Personalization
-Logged-in users can personalize content based on their software and hardware background. [Sign up](/signup) to get started!
+Logged-in users can personalize content based on their software and hardware background. (Sign up feature coming soon!)
 :::

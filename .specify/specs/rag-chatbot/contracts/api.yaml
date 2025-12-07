@@ -1,0 +1,215 @@
+openapi: 3.0.0
+info:
+  title: RAG Chatbot API
+  description: API for Physical AI & Humanoid Robotics Textbook Chatbot
+  version: 1.0.0
+servers:
+  - url: http://localhost:8000/api
+    description: Local development
+  - url: https://your-api-url.com/api
+    description: Production
+
+paths:
+  /health:
+    get:
+      summary: Health check endpoint
+      tags:
+        - Health
+      responses:
+        '200':
+          description: Service is healthy
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: "healthy"
+                  timestamp:
+                    type: string
+                    format: date-time
+
+  /chat/query:
+    post:
+      summary: General book content query
+      tags:
+        - Chat
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/QueryRequest'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/QueryResponse'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '429':
+          description: Rate limit exceeded
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+  /chat/query-selected:
+    post:
+      summary: Selected text query
+      tags:
+        - Chat
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SelectedTextQueryRequest'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/QueryResponse'
+        '400':
+          description: Bad request
+        '500':
+          description: Internal server error
+
+  /embeddings/process:
+    post:
+      summary: Process all documents (admin)
+      tags:
+        - Admin
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                force:
+                  type: boolean
+                  description: Force regeneration of all documents
+                  default: false
+      responses:
+        '200':
+          description: Processing started
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                  documents_processed:
+                    type: integer
+        '401':
+          description: Unauthorized (if auth is added)
+
+  /embeddings/update:
+    post:
+      summary: Update embeddings for changed files (admin)
+      tags:
+        - Admin
+      responses:
+        '200':
+          description: Update completed
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                  files_updated:
+                    type: integer
+
+components:
+  schemas:
+    QueryRequest:
+      type: object
+      required:
+        - query
+      properties:
+        query:
+          type: string
+          description: User's question
+          maxLength: 1000
+        user_id:
+          type: string
+          description: User ID for session management (required for conversation history)
+        session_id:
+          type: string
+          nullable: true
+          description: Session ID (optional, will be created if not provided)
+        max_chunks:
+          type: integer
+          default: 5
+          description: Maximum number of chunks to retrieve
+
+    SelectedTextQueryRequest:
+      type: object
+      required:
+        - query
+        - selected_text
+      properties:
+        query:
+          type: string
+          description: User's question about selected text
+          maxLength: 1000
+        selected_text:
+          type: string
+          description: User-selected text from the page
+          maxLength: 5000
+        conversation_id:
+          type: string
+          nullable: true
+
+    QueryResponse:
+      type: object
+      properties:
+        answer:
+          type: string
+          description: Generated answer from agent
+        session_id:
+          type: string
+          description: Session ID for maintaining conversation history
+        sources:
+          type: array
+          items:
+            type: object
+            properties:
+              document_path:
+                type: string
+              chunk_index:
+                type: integer
+              relevance_score:
+                type: number
+        response_time_ms:
+          type: integer
+
+    ErrorResponse:
+      type: object
+      properties:
+        error:
+          type: string
+        message:
+          type: string
+        code:
+          type: string
+

@@ -1,55 +1,92 @@
-# [PROJECT_NAME] Constitution
-<!-- Example: Spec Constitution, TaskFlow Constitution, etc. -->
+# Physical AI & Humanoid Robotics Textbook Constitution
 
 ## Core Principles
 
-### [PRINCIPLE_1_NAME]
-<!-- Example: I. Library-First -->
-[PRINCIPLE_1_DESCRIPTION]
-<!-- Example: Every feature starts as a standalone library; Libraries must be self-contained, independently testable, documented; Clear purpose required - no organizational-only libraries -->
+### I. Spec-Driven Development
+Every feature must start with a clear specification before implementation. Specifications are treated as first-class artifacts and must include:
+- User scenarios with acceptance criteria
+- Functional requirements
+- Success criteria
+- Edge cases
 
-### [PRINCIPLE_2_NAME]
-<!-- Example: II. CLI Interface -->
-[PRINCIPLE_2_DESCRIPTION]
-<!-- Example: Every library exposes functionality via CLI; Text in/out protocol: stdin/args → stdout, errors → stderr; Support JSON + human-readable formats -->
+### II. AI-Native Development
+Leverage AI tools (Claude Code, Spec-Kit Plus) throughout the development lifecycle:
+- Use spec-driven templates for all features
+- Document all AI interactions in PHR (Prompt History Records)
+- Create reusable Agent Skills and Subagents where applicable
 
-### [PRINCIPLE_3_NAME]
-<!-- Example: III. Test-First (NON-NEGOTIABLE) -->
-[PRINCIPLE_3_DESCRIPTION]
-<!-- Example: TDD mandatory: Tests written → User approved → Tests fail → Then implement; Red-Green-Refactor cycle strictly enforced -->
+### III. Test-First Development
+- Write tests before implementation
+- All features must have acceptance criteria that are testable
+- Integration tests required for RAG chatbot, authentication, and API endpoints
 
-### [PRINCIPLE_4_NAME]
-<!-- Example: IV. Integration Testing -->
-[PRINCIPLE_4_DESCRIPTION]
-<!-- Example: Focus areas requiring integration tests: New library contract tests, Contract changes, Inter-service communication, Shared schemas -->
+### IV. Documentation as Code
+- All course content in Markdown/MDX
+- Code examples must be executable and tested
+- API documentation must be up-to-date
 
-### [PRINCIPLE_5_NAME]
-<!-- Example: V. Observability, VI. Versioning & Breaking Changes, VII. Simplicity -->
-[PRINCIPLE_5_DESCRIPTION]
-<!-- Example: Text I/O ensures debuggability; Structured logging required; Or: MAJOR.MINOR.BUILD format; Or: Start simple, YAGNI principles -->
+### V. User-Centric Design
+- Personalization based on user background (software/hardware experience)
+- Multi-language support (English/Urdu)
+- Accessible and responsive design
 
-### [PRINCIPLE_6_NAME]
+## Technology Stack Constraints
 
+### Frontend
+- **Framework**: Docusaurus (required)
+- **Language**: TypeScript/JavaScript
+- **Package Manager**: pnpm
+- **Styling**: CSS Modules, custom CSS
 
-[PRINCIPLE__DESCRIPTION]
+### Backend
+- **Framework**: FastAPI (Python)
+- **Package Manager**: UV (required)
+- **Database**: Neon Serverless Postgres
+- **Vector DB**: Qdrant Cloud Free Tier
+- **AI Services**: Google Gemini API (for chatbot, embeddings, and agents)
+- **OpenAI Whisper** (for voice-to-action in Module 4 - VLA, if needed)
 
-## [SECTION_2_NAME]
-<!-- Example: Additional Constraints, Security Requirements, Performance Standards, etc. -->
+### Authentication
+- **Provider**: Better Auth
 
-[SECTION_2_CONTENT]
-<!-- Example: Technology stack requirements, compliance standards, deployment policies, etc. -->
+### Deployment
+- **Platform**: GitHub Pages or Vercel
+- **CI/CD**: GitHub Actions
 
-## [SECTION_3_NAME]
-<!-- Example: Development Workflow, Review Process, Quality Gates, etc. -->
+## Development Workflow
 
-[SECTION_3_CONTENT]
-<!-- Example: Code review requirements, testing gates, deployment approval process, etc. -->
+1. **Specification Phase**: Create spec using `/sp.spec` command
+2. **Planning Phase**: Create implementation plan using `/sp.plan` command
+3. **Task Breakdown**: Create tasks using `/sp.tasks` command
+4. **Implementation**: Execute using `/sp.implement` command
+5. **Documentation**: Update PHR and ADR as needed
+
+## Package Management
+
+### Python Packages
+- **Always use UV** for Python package management
+- Install packages: `uv add <package-name>`
+- Install dev dependencies: `uv add --dev <package-name>`
+- Install tools: `uv tool install <tool-name>`
+
+### Node.js Packages
+- **Always use pnpm** for Node.js package management
+- Install packages: `pnpm add <package-name>`
+- Install dev dependencies: `pnpm add -D <package-name>`
+
+## Quality Gates
+
+- All code must pass linting
+- All tests must pass before merge
+- Documentation must be updated
+- PHR must be maintained for AI interactions
+- ADR required for architectural decisions
 
 ## Governance
-<!-- Example: Constitution supersedes all other practices; Amendments require documentation, approval, migration plan -->
 
-[GOVERNANCE_RULES]
-<!-- Example: All PRs/reviews must verify compliance; Complexity must be justified; Use [GUIDANCE_FILE] for runtime development guidance -->
+This constitution supersedes all other practices. Amendments require:
+- Documentation of the change
+- Approval from project maintainers
+- Migration plan if breaking changes
 
-**Version**: [CONSTITUTION_VERSION] | **Ratified**: [RATIFICATION_DATE] | **Last Amended**: [LAST_AMENDED_DATE]
-<!-- Example: Version: 2.1.1 | Ratified: 2025-06-13 | Last Amended: 2025-07-16 -->
+**Version**: 1.0.0 | **Ratified**: 2025-01-XX | **Last Amended**: 2025-01-XX
